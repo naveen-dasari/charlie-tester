@@ -41,14 +41,14 @@ describe('hello-world.controller', () => {
     });
   });
 
-  describe('Given /hello/Johnny', () => {
-    const name = 'Johnny';
+  describe('Given /hello/Ben', () => {
+    const name = 'Ben';
 
     beforeEach(() => {
       mockGreeting.mockImplementation(name => name);
     });
 
-    test('should return "Hello, Johnny!"', done => {
+    test('should return "Hello, Ben!"', done => {
       request(app).get(`/hello/${name}`).expect(200).expect(name, done);
     });
   });
