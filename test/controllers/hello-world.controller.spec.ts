@@ -41,7 +41,7 @@ describe('hello-world.controller', () => {
     });
   });
 
-  describe('Given /hello/Ben', () => {
+  describe('Given /hello/Ben Sebastian', () => {
     const name = 'Ben';
 
     beforeEach(() => {
