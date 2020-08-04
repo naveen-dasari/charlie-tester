@@ -231,8 +231,8 @@ spec:
                     git branch --set-upstream-to=origin/${BRANCH} ${BRANCH}
                     git reset --hard ${COMMIT_HASH}
 
-                    git config --global user.name "Jenkins Pipeline"
-                    git config --global user.email "jenkins@ibmcloud.com"
+                    git config --global user.name "creativeben"
+                    git config --global user.email "ben.sebastian@infosys.com"
 
                     if [[ "${BRANCH}" == "master" ]] && [[ $(git describe --tag `git rev-parse HEAD`) =~ (^[0-9]+.[0-9]+.[0-9]+$) ]] || \
                        [[ $(git describe --tag `git rev-parse HEAD`) =~ (^[0-9]+.[0-9]+.[0-9]+-${BRANCH}[.][0-9]+$) ]]
