@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as bodyParser from "body-parser";
 import {Server} from 'typescript-rest';
 import {Inject} from 'typescript-ioc';
 import {AddressInfo} from 'net';
@@ -12,6 +13,7 @@ import fs = require('fs');
 import http = require('http');
 import path = require('path');
 import cors = require('cors');
+import { Routes } from "./routes/crmRoutes";
 
 const config = npmPackage.config || {
   protocol: 'http',
@@ -30,12 +32,15 @@ export class ApiServer {
   // private readonly app: express.Application;
   private server: http.Server = null;
   public PORT: number = +process.env.PORT || npmPackage.config.port;
+  public routePrv: Routes = new Routes();
 
   constructor(private readonly app: express.Application = express(), apiContext = configApiContext) {
 
     this.app.use(opentracingMiddleware({tracer: this.tracer}));
     this.logger.apply(this.app);
     this.app.use(cors());
+	this.config(); //added by ben
+	this.routePrv.routes(this.app);   //ben
 
     if (!apiContext || apiContext === '/') {
       this.app.use(express.static(path.join(process.cwd(), 'public'), { maxAge: 31557600000 }));
@@ -71,6 +76,13 @@ export class ApiServer {
       this.app.use(apiContext, apiRouter);
     }
   }
+  
+  private config(): void{
+        // support application/json type post data
+        this.app.use(bodyParser.json());
+        //support application/x-www-form-urlencoded post data
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+    }
 
   /**
    * Start the server
