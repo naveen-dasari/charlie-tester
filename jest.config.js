@@ -14,7 +14,8 @@ module.exports = {
     "logs/",
     "dist/",
     "pacts/",
-    "coverage/"
+    "coverage/",
+    "src/server.ts"
   ],
   testResultsProcessor: "jest-sonar-reporter",
   testMatch: ["<rootDir>/test/**/*.spec.ts"],
